@@ -29,6 +29,10 @@ interface NewsItem {
 }
 
 
+const Test = [
+  { category: "You found an easter egg", detail: "100", probability: "100" },
+];
+
 
 const ProbabilityTable: React.FC<{
   title: string;
@@ -268,6 +272,10 @@ const LogiCityDescription = () => {
                     Probabilities
                   </h2>
                 </div>
+                <ProbabilityTable
+                  title=""
+                  data={Test}
+                />
                 <br />
               </section>
             )}
