@@ -22,7 +22,7 @@ function App() {
     }
     return 'light';
   });
-  const [Maintenancement, setMaintenance] = useState(() => {
+  const [Maintenancement] = useState(() => {
     return servermaintenanacement.maintenancement;
   });
 
