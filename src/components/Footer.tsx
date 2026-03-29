@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   // Footer navigation links
   const quickLinks = [
     { name: "홈", path: "/" },
-    { name: "뉴스", path: "/news" },
+    { name: "뉴스", path: "/newsdetail" },
     { name: "상점", path: "/store" },
     { name: "라이선스", path: "/license" },
   ];

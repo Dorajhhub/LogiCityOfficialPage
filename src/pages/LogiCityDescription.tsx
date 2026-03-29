@@ -297,7 +297,7 @@ const LogiCityDescription = () => {
                     news.map((item) => (
                       <a
                         key={item.id}
-                        href={`#/news?id=${item.id}`}
+                        href={`#/newsdetail?id=${item.id}`}
                         className="block p-4 transition-all duration-300 border border-transparent rounded-2xl bg-slate-50 dark:bg-slate-900/50 hover:bg-white hover:shadow-md hover:border-indigo-100 dark:hover:bg-slate-800 dark:hover:border-indigo-500/20 group"
                       >
                         <div className="mb-1 text-xs font-bold text-indigo-600 dark:text-indigo-400">

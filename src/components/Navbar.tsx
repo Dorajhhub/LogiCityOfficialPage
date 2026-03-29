@@ -48,7 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, isSeasonal }) => {
 
   const navLinks = [
     { name: "홈", path: "/" },
-    { name: "뉴스", path: "/news" },
+    { name: "뉴스", path: "/newsdetail" },
     { name: "상점", path: "/store" },
     { name: "라이선스", path: "/license" },
   ];
