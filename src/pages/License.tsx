@@ -18,44 +18,61 @@ const LicenseViewer: React.FC<{ item: LicenseItem }> = ({ item }) => {
   }, [item.path, item.name]);
 
   return (
-    <div className="p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
-      <h2 className="text-2xl font-bold mb-4 text-slate-800 dark:text-slate-100">
-        {item.name}
-      </h2>
-      <div className="prose prose-slate dark:prose-invert max-w-none">
-        <div className="h-96 overflow-y-auto p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
-          <pre className="whitespace-pre-wrap font-sans text-sm md:text-base leading-relaxed text-slate-600 dark:text-slate-300 bg-transparent p-0 border-none my-0">
-            {text || "라이선스 정보를 불러오는 중입니다..."}
-          </pre>
+    <div className="rounded-3xl border border-slate-200/80 bg-white/90 p-8 shadow-2xl shadow-slate-900/10 transition hover:-translate-y-1 hover:shadow-slate-900/20 dark:border-slate-800/80 dark:bg-slate-950/90">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400">
+            LICENSE
+          </p>
+          <h2 className="mt-3 text-3xl font-extrabold text-slate-900 dark:text-white">
+            {item.name}
+          </h2>
         </div>
+        <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-indigo-700 ring-1 ring-indigo-100 dark:bg-indigo-500/15 dark:text-indigo-200 dark:ring-indigo-500/10">
+          공개 문서
+        </span>
+      </div>
+
+      <div className="rounded-3xl border border-slate-200/70 bg-slate-50 p-5 text-sm leading-7 text-slate-700 shadow-sm dark:border-slate-800/70 dark:bg-slate-900 dark:text-slate-300">
+        <pre className="whitespace-pre-wrap font-sans bg-transparent m-0">
+          {text || "라이선스 정보를 불러오는 중입니다..."}
+        </pre>
       </div>
     </div>
   );
 };
 
 const License: React.FC = () => {
-  // 라이선스 목록을 여기서 설정하세요.
   const licenseList: LicenseItem[] = [
     {
       name: "Noto Sans KR",
       path: `${process.env.PUBLIC_URL}/license/font-kr.txt`,
-    }
-    // 예시: 폰트 라이선스 추가
-    // {
-    //   name: "Noto Sans KR",
-    //   path: `${process.env.PUBLIC_URL}/licenses/noto_sans_kr.txt`,
-    // },
+    },
   ];
 
   return (
-    <div className="container px-4 py-12 mx-auto max-w-4xl">
-      <h1 className="text-4xl font-black mb-8 text-center text-slate-900 dark:text-white tracking-tight">
-        라이선스 정보
-      </h1>
-      <div className="space-y-8">
-        {licenseList.map((item, index) => (
-          <LicenseViewer key={index} item={item} />
-        ))}
+    <div className="bg-slate-50 py-16 dark:bg-slate-950">
+      <div className="container px-4 mx-auto max-w-6xl">
+        <div className="mb-12 rounded-[2rem] border border-slate-200/80 bg-white/80 p-10 shadow-2xl shadow-slate-900/5 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/80">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-indigo-600 dark:text-indigo-400">
+              License Information
+            </p>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+              프로젝트에서 사용하는 라이선스
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
+              이 페이지에서는 프로젝트에 포함된 주요 자산의 라이선스를 확인할 수 있습니다. 모든 라이선스는
+              투명하게 공개되며, 필요한 경우 자료를 자유롭게 참고하세요.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-2">
+          {licenseList.map((item, index) => (
+            <LicenseViewer key={index} item={item} />
+          ))}
+        </div>
       </div>
     </div>
   );

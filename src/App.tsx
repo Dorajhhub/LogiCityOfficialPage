@@ -11,7 +11,9 @@ import LogiCityDescription from "./pages/LogiCityDescription";
 import NewsDetail from "./pages/NewsDetail";
 import Store from "./pages/Store";
 import License from "./pages/License";
+import ServerMaintenancement from "./pages/ServerMaintenancement";
 import "./App.css";
+import {servermaintenanacement} from "./config";
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -20,6 +22,11 @@ function App() {
     }
     return 'light';
   });
+  const [Maintenancement, setMaintenance] = useState(() => {
+    return servermaintenanacement.maintenancement;
+  });
+
+
   const [isSeasonal] = useState(false);
 
   useEffect(() => {
@@ -36,11 +43,17 @@ function App() {
         <Navbar theme={theme} setTheme={setTheme} isSeasonal={isSeasonal} />
         <main className="flex-grow pt-20">
           <Routes>
-            <Route path="/" element={<LogiCityDescription />} />
-            <Route path="/news" element={<NewsDetail />} />
-            <Route path="/store" element={<Store />} />
-            <Route path="/license" element={<License />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            {Maintenancement ? (
+              <Route path="*" element={<ServerMaintenancement />} />
+            ) : (
+              <>
+                <Route path="/" element={<LogiCityDescription />} />
+                <Route path="/news" element={<NewsDetail />} />
+                <Route path="/store" element={<Store />} />
+                <Route path="/license" element={<License />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </>
+            )}
           </Routes>
         </main>
         <Footer />
