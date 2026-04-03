@@ -71,8 +71,8 @@ const Store = () => {
 
   if (loading || loadingVouchers) {
     return (
-      <div className="bg-slate-50 min-h-screen font-sans">
-        <main className="container mx-auto px-4 py-8 md:py-12">
+      <main className="container-glass smooth-scroller py-8 min-h-screen font-sans">
+        <div className="bg-white dark:bg-slate-900 card p-8">
           <div className="text-center mb-12 md:mb-20">
             <div className="h-10 bg-slate-200 rounded-lg w-1/2 mx-auto mb-4 animate-pulse"></div>
             <div className="h-6 bg-slate-200 rounded-lg w-3/4 mx-auto animate-pulse"></div>
@@ -94,35 +94,39 @@ const Store = () => {
               </div>
             ))}
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-50 font-sans">
-        <div className="text-center p-8 bg-white rounded-xl shadow-md">
-          <h2 className="text-2xl font-bold text-red-600 mb-2">😥 오류 발생</h2>
-          <p className="text-slate-600">
-            상점 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.
-          </p>
+      <main className="container-glass smooth-scroller py-8 min-h-screen">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center p-8 bg-white rounded-xl shadow-md dark:bg-slate-900 dark:border dark:border-slate-700">
+            <h2 className="text-2xl font-bold text-red-600 mb-2">😥 오류 발생</h2>
+            <p className="text-slate-600 dark:text-slate-300">
+              상점 데이터를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.
+            </p>
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="bg-slate-50 min-h-screen font-sans">
-      <main className="container mx-auto px-4 py-8 md:py-12">
-        <section className="text-center mb-12 md:mb-20">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-800 mb-4 tracking-tight">
-            LogiCity 상점
-          </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
-            
-          </p>
-        </section>
+    <main className="container-glass smooth-scroller py-8 min-h-screen">
+      <div className="card p-8 bg-white dark:bg-slate-900">
+        <div className="container mx-auto px-4 py-8 md:py-12">
+          <section className="text-center mb-12 md:mb-20">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-slate-800 mb-4 tracking-tight">
+              LogiCity 상점
+            </h1>
+            <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
+              
+            </p>
+          </section>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {shops.map((item) => (
@@ -242,9 +246,9 @@ const Store = () => {
             </div>
           ))}
         </div>
-      </main>
-    </div>
-  );
+      </div>
+    </main>
+  )
 };
 
 export default Store;

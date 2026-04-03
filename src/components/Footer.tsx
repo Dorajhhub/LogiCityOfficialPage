@@ -5,12 +5,19 @@ import { GithubIcon, HeartIcon } from "lucide-react";
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
+  type FooterItem = {
+    name: string;
+    path?: string;
+    outpath?: string;
+  };
+
   // Footer navigation links
-  const quickLinks = [
+  const quickLinks: FooterItem[] = [
     { name: "홈", path: "/" },
     { name: "뉴스", path: "/newsdetail" },
     { name: "상점", path: "/store" },
     { name: "라이선스", path: "/license" },
+    { name: "MinDevX", outpath: "https://mindevx.pages.dev/#/" },
   ];
 
   const socialLinks = [
@@ -58,12 +65,23 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <Link
-                    to={link.path}
-                    className="block px-2 py-1 text-sm text-gray-600 transition-colors duration-300 rounded hover:text-indigo-500 dark:text-gray-300 dark:hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  >
-                    {link.name}
-                  </Link>
+                  {link.outpath ? (
+                    <a
+                      href={link.outpath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block px-2 py-1 text-sm text-gray-600 transition-colors duration-300 rounded hover:text-indigo-500 dark:text-gray-300 dark:hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path ?? "/"}
+                      className="block px-2 py-1 text-sm text-gray-600 transition-colors duration-300 rounded hover:text-indigo-500 dark:text-gray-300 dark:hover:text-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

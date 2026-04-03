@@ -185,7 +185,8 @@ const LogiCityDescription = () => {
         </div>
       </Modal>
 
-      <div className="px-4 sm:px-6 lg:px-8 pb-24 mx-auto space-y-16 md:space-y-24 max-w-7xl animate-fade-in-up">
+      <main className="container-glass smooth-scroller py-8">
+        <div className="px-4 sm:px-6 lg:px-8 pb-24 mx-auto space-y-16 md:space-y-24 max-w-7xl animate-fade-in-up"></div>
         {/* Hero Section */}
         <div className="relative group overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-rose-400 via-fuchsia-500 to-indigo-600 p-1 px-1 shadow-2xl transition-all duration-500 hover:shadow-indigo-500/20">
           <div className="relative bg-white dark:bg-slate-950 rounded-[2.4rem] p-10 md:p-16 overflow-hidden">
@@ -316,7 +317,7 @@ const LogiCityDescription = () => {
             </div>
           </aside>
         </div>
-      </div>
+      </main>
     </>
   );
 };

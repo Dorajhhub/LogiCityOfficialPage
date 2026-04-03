@@ -5,9 +5,7 @@ const News: React.FC = () => {
   const jsonText = JSON.stringify(rawNewsData, null, 2);
 
   return (
-    <pre>
-      {jsonText}
-    </pre>
+    <pre>{jsonText}</pre>
   );
 };
 

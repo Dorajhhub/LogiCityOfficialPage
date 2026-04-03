@@ -54,17 +54,20 @@ const NewsDetail: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center">
-        <div className="w-10 h-10 mb-4 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
-        <p className="text-gray-500 animate-pulse">Loading news data  </p>
-      </div>
+      <main className="container-glass smooth-scroller py-8">
+        <div className="min-h-[60vh] flex flex-col items-center justify-center card p-8">
+          <div className="w-10 h-10 mb-4 border-4 border-indigo-500 rounded-full border-t-transparent animate-spin"></div>
+          <p className="text-gray-500 animate-pulse">Loading news data</p>
+        </div>
+      </main>
     );
   }
 
   if (id && newsItem) {
     return (
-      <div className="max-w-4xl px-4 py-12 mx-auto sm:px-6 lg:px-8 animate-fade-in-up">
-        {/* Back Button */}
+      <main className="container-glass smooth-scroller py-8">
+        <div className="max-w-4xl px-4 py-12 mx-auto sm:px-6 lg:px-8 animate-fade-in-up">
+          {/* Back Button */}
         <Link
           to="/news"
           className="inline-flex items-center gap-2 mb-8 text-sm font-bold text-slate-500 transition-colors hover:text-indigo-600 dark:text-slate-400 group"
@@ -108,11 +111,13 @@ const NewsDetail: React.FC = () => {
           </div>
         </article>
       </div>
+      </main>
     );
   }
 
   return (
-    <div className="max-w-6xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+    <main className="container-glass smooth-scroller py-8">
+      <div className="max-w-6xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div className="mb-16 text-center">
         <div className="inline-flex items-center justify-center w-20 h-20 mb-8 text-white shadow-xl rounded-3xl bg-gradient-to-tr from-indigo-500 to-purple-600 shadow-indigo-500/20">
           <NewspaperIcon className="w-10 h-10" />
@@ -197,7 +202,8 @@ const NewsDetail: React.FC = () => {
         </div>
       )}
     </div>
-  );
+    </main>
+  )
 };
 
 export default NewsDetail;

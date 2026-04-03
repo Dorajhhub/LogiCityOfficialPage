@@ -52,8 +52,7 @@ const ServerMaintenancement = () => {
                 서버 점검 중입니다.
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-8 text-slate-200 sm:text-lg">
-                현재 시스템 안정화를 위해 서버 점검이 진행 중입니다. 불편을 드려 죄송합니다.
-                점검이 끝나면 자동으로 서비스가 다시 열립니다.
+                {servermaintenanacement.message}
               </p>
             </div>
 

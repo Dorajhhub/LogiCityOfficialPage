@@ -46,11 +46,18 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, isSeasonal }) => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   }, [setTheme]);
 
-  const navLinks = [
+  type NavItem = {
+    name: string;
+    path?: string;
+    outpath?: string;
+  };
+
+  const navLinks: NavItem[] = [
     { name: "홈", path: "/" },
     { name: "뉴스", path: "/newsdetail" },
     { name: "상점", path: "/store" },
     { name: "라이선스", path: "/license" },
+    { name: "MinDevX", outpath: "https://mindevx.pages.dev/#/" },
   ];
 
   // Close mobile menu on escape key press
@@ -69,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, isSeasonal }) => {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-md border-b border-slate-200/50 dark:border-slate-800/50"
+          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-md safari-fix shadow-md border-b border-slate-200/50 dark:border-slate-800/50"
           : "bg-transparent"
       }`}
       aria-label="Main navigation"
@@ -94,26 +101,45 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, isSeasonal }) => {
 
           {/* Desktop Menu */}
           <div className="items-center hidden space-x-1 md:flex">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300 relative group focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 ${
-                    isActive
-                      ? "text-indigo-600 dark:text-indigo-400"
-                      : "text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400"
-                  }`
-                }
-                aria-current={
-                  location.pathname === link.path ? "page" : undefined
-                }
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-1/2 group-hover:left-1/2"></span>
-                <span className="absolute bottom-0 right-1/2 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-1/2 group-hover:right-1/2"></span>
-              </NavLink>
-            ))}
+            {navLinks.map((link) => {
+              const key = link.path ?? link.outpath ?? link.name;
+              if (link.outpath) {
+                return (
+                  <a
+                    key={key}
+                    href={link.outpath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300 relative group focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                  >
+                    {link.name}
+                    <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-1/2 group-hover:left-1/2"></span>
+                    <span className="absolute bottom-0 right-1/2 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-1/2 group-hover:right-1/2"></span>
+                  </a>
+                );
+              }
+
+              return (
+                <NavLink
+                  key={key}
+                  to={link.path ?? "/"}
+                  className={({ isActive }) =>
+                    `px-4 py-2 rounded-lg text-sm font-semibold transition-colors duration-300 relative group focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-slate-950 ${
+                      isActive
+                        ? "text-indigo-600 dark:text-indigo-400"
+                        : "text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                    }`
+                  }
+                  aria-current={
+                    location.pathname === link.path ? "page" : undefined
+                  }
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-1/2 group-hover:left-1/2"></span>
+                  <span className="absolute bottom-0 right-1/2 w-0 h-0.5 bg-indigo-500 transition-all duration-300 group-hover:w-1/2 group-hover:right-1/2"></span>
+                </NavLink>
+              );
+            })}
 
             <div className="w-px h-5 mx-2 bg-slate-200 dark:bg-slate-700"></div>
 
@@ -172,7 +198,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, isSeasonal }) => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 transition-opacity duration-300 md:hidden bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-40 transition-opacity duration-300 md:hidden bg-black/50 backdrop-blur-sm safari-fix"
           onClick={toggleMobileMenu}
           aria-hidden="true"
         ></div>
@@ -195,25 +221,43 @@ const Navbar: React.FC<NavbarProps> = ({ theme, setTheme, isSeasonal }) => {
             </button>
           </div>
           <div className="flex-1 px-4 pt-4 pb-8 space-y-2">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `block px-4 py-4 rounded-xl text-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
-                    isActive
-                      ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
-                      : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
-                  }`
-                }
-                onClick={toggleMobileMenu}
-                aria-current={
-                  location.pathname === link.path ? "page" : undefined
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
+            {navLinks.map((link) => {
+              const key = link.path ?? link.outpath ?? link.name;
+              if (link.outpath) {
+                return (
+                  <a
+                    key={key}
+                    href={link.outpath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-4 rounded-xl text-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    onClick={toggleMobileMenu}
+                  >
+                    {link.name}
+                  </a>
+                );
+              }
+
+              return (
+                <NavLink
+                  key={key}
+                  to={link.path ?? "/"}
+                  className={({ isActive }) =>
+                    `block px-4 py-4 rounded-xl text-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                      isActive
+                        ? "bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400"
+                        : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    }`
+                  }
+                  onClick={toggleMobileMenu}
+                  aria-current={
+                    location.pathname === link.path ? "page" : undefined
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              );
+            })}
           </div>
         </div>
       </div>
