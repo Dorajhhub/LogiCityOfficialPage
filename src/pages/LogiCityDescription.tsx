@@ -15,6 +15,8 @@ import {
   Coins,
   ArrowRight,
 } from "lucide-react";
+import rawNewsData from "../data/news.json";
+
 
 interface NewsItem {
   id: number;
@@ -151,17 +153,14 @@ const LogiCityDescription = () => {
     const startDate = new Date(2025, 0, 25);
     if (new Date() >= startDate) setShowProbability(true);
 
-    fetch(`${process.env.PUBLIC_URL}/news.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        setNews(
-          data.newsList
-            .filter((n: NewsItem) => n.g === "LogiCity")
-            .slice(0, 5)
-        );
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
+    const list = rawNewsData.newsList;
+    
+    setNews(
+      list
+        .filter((n: NewsItem) => n.g === "LogiCity")
+        .slice(0, 5)
+    );
+    setLoading(false);
   }, []);
 
   return (

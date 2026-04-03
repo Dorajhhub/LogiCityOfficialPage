@@ -1,4 +1,4 @@
 export const servermaintenanacement = {
-    maintenancement: false,
-    ETC: new Date('2026-03-29T18:53:05'),
+    maintenancement: true,
+    ETC: new Date('2026-04-03T19:50:00'),
 }

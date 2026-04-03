@@ -6,6 +6,7 @@ import {
   NewspaperIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/solid";
+import rawNewsData from "../data/news.json";
 
 interface NewsItem {
   id: number;
@@ -30,27 +31,16 @@ const NewsDetail: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${process.env.PUBLIC_URL}/news.json`)
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch");
-        return response.json();
-      })
-      .then((data) => {
-        const list = data.newsList;
-        setNewsList(list);
+    const list = rawNewsData.newsList;
+    setNewsList(list);
 
-        if (id) {
-          const item = list.find(
-            (item: NewsItem) => item.id === parseInt(id, 10)
-          );
-          item ? setNewsItem(item) : setError("News item not found");
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("Error loading news");
-        setLoading(false);
-      });
+    if (id) {
+      const item = list.find(
+        (item: NewsItem) => item.id === parseInt(id, 10)
+      );
+      item ? setNewsItem(item) : setError("News item not found");
+    }
+    setLoading(false);
   }, [id]);
 
   const filteredNewsList =
@@ -161,7 +151,7 @@ const NewsDetail: React.FC = () => {
         {filteredNewsList.map((item, index) => (
           <Link
             key={item.id}
-            to={`/news?id=${item.id}`}
+            to={`/newsdetail?id=${item.id}`}
             className="group relative flex flex-col p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 animate-fade-in-up"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
